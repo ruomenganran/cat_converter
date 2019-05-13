@@ -1,0 +1,129 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CatConverter"
+        xmlns:input="clr-namespace:System.Windows.Input;assembly=PresentationCore"
+        xmlns:DataConvert="clr-namespace:DataConvert" x:Name="window" x:Class="CatConverter.MainWindow"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="555.5" Width="421.5" MinWidth="250" MinHeight="380">
+    <Grid Background="Gainsboro" Margin="0,0,0,0" MinWidth="200" MinHeight="300">
+        <Button Content="Format" HorizontalAlignment="Left" Height="27" Margin="27,14,0,0" VerticalAlignment="Top" Width="74" Click="Button_Click_Format" FontSize="14"/>
+        <Button Content="UnFormat" HorizontalAlignment="Left" Height="27" Margin="120,14,0,0" VerticalAlignment="Top" Width="74" Click="Button_Click_UnFormat" FontSize="14"/>
+        <Grid Margin="14,41,14,16.5" MinWidth="200" MinHeight="280">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="105*"/>
+                <RowDefinition Height="105*"/>
+                <RowDefinition Height="105*"/>
+                <RowDefinition Height="105*"/>
+            </Grid.RowDefinitions>
+            <Grid Margin="0,0,0,0"  Grid.Row="0">
+                <TextBlock HorizontalAlignment="Left" Height="15" Margin="5,5,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="85"><Run Text="H"/><Run Text="ex"/></TextBlock>
+                <TextBox x:Name="TB_Hex" TextChanged="TB_Hex_TextChanged" SelectionChanged="TB_Hex_SelectionChanged"  PreviewTextInput="TB_Hex_PreviewTextInput" AcceptsReturn="True" InputMethod.IsInputMethodEnabled="False" Margin="5,20,5,0"   TextWrapping="Wrap" FontFamily="Consolas" FontSize="14" VerticalScrollBarVisibility="Auto">
+                    <TextBox.Resources>
+                        <VisualBrush x:Key="HintText" TileMode="None" Opacity="1" Stretch="None" AlignmentX="Left" AlignmentY="Top" >
+                            <VisualBrush.Visual>
+                                <TextBox FontStyle="Normal" Text="41 42 43.." BorderBrush="{x:Null}" SelectionBrush="{x:Null}" Foreground="Gray" Height="{Binding ActualHeight, ElementName=TB_Hex, Mode=OneWay}" Width="{Binding ActualWidth, ElementName=TB_Hex, Mode=OneWay}"/>
+                            </VisualBrush.Visual>
+                        </VisualBrush>
+                    </TextBox.Resources>
+                    <TextBox.Style>
+                        <Style TargetType="{x:Type TextBox}">
+                            <Style.Triggers>
+                                <Trigger Property="Text" Value="{x:Null}">
+                                    <Setter Property="Background" Value="{StaticResource HintText}"/>
+                                </Trigger>
+                                <Trigger Property="Text" Value="">
+                                    <Setter Property="Background" Value="{StaticResource HintText}"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TextBox.Style>
+                </TextBox>
+            </Grid>
+            <Grid Margin="0,0,0,0" Grid.Row="1">
+                <TextBlock HorizontalAlignment="Left" Height="15" TextWrapping="Wrap" Text="ASCII" VerticalAlignment="Top" Width="85" Margin="5,5,0,0"/>
+                <TextBox x:Name="TB_ASCII" TextChanged="TB_ASCII_TextChanged" PreviewTextInput="TB_ASCII_PreviewTextInput" AcceptsReturn="True"  InputMethod.IsInputMethodEnabled="False" Margin="5,20,5,0"  TextWrapping="Wrap" FontFamily="Consolas" FontSize="14" VerticalScrollBarVisibility="Auto">
+                    <TextBox.Resources>
+                        <VisualBrush x:Key="HintText" TileMode="None" Opacity="1" Stretch="None" AlignmentX="Left" AlignmentY="Top">
+                            <VisualBrush.Visual>
+                                <TextBox FontStyle="Normal" Text="ABC.." BorderBrush="{x:Null}" SelectionBrush="{x:Null}" Foreground="Gray" Height="{Binding ActualHeight, ElementName=TB_ASCII, Mode=OneWay}" Width="{Binding ActualWidth, ElementName=TB_ASCII, Mode=OneWay}"/>
+                            </VisualBrush.Visual>
+                        </VisualBrush>
+                    </TextBox.Resources>
+                    <TextBox.Style>
+                        <Style TargetType="{x:Type TextBox}">
+                            <Style.Triggers>
+                                <Trigger Property="Text" Value="{x:Null}">
+                                    <Setter Property="Background" Value="{StaticResource HintText}"/>
+                                </Trigger>
+                                <Trigger Property="Text" Value="">
+                                    <Setter Property="Background" Value="{StaticResource HintText}"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TextBox.Style>
+                    <TextBox.DataContext>
+                        <DataConvert:Textshow/>
+                    </TextBox.DataContext>
+                </TextBox>
+            </Grid>
+            <Grid Margin="0,0,0,0" Grid.Row="2">
+                <TextBlock Height="15" Margin="5,5,0,0" TextWrapping="Wrap" Text="Decimal" VerticalAlignment="Top" HorizontalAlignment="Left" Width="84.401"/>
+                <TextBox x:Name="TB_Dec" PreviewTextInput="TB_Dec_PreviewTextInput" TextChanged="TB_Dec_TextChanged" InputMethod.IsInputMethodEnabled="False" AcceptsReturn="True" Margin="5,20,5,0"  TextWrapping="Wrap" FontFamily="Consolas" FontSize="14" VerticalScrollBarVisibility="Auto">
+                    <TextBox.Resources>
+                        <VisualBrush x:Key="HintText" TileMode="None" Opacity="1" Stretch="None" AlignmentX="Left" AlignmentY="Top">
+                            <VisualBrush.Visual>
+                                <TextBox FontStyle="Normal" Text="65 66 67.." BorderBrush="{x:Null}" SelectionBrush="{x:Null}" Foreground="Gray" Height="{Binding ActualHeight, ElementName=TB_Dec, Mode=OneWay}" Width="{Binding ActualWidth, ElementName=TB_Dec, Mode=OneWay}"/>
+                            </VisualBrush.Visual>
+                        </VisualBrush>
+                    </TextBox.Resources>
+                    <TextBox.DataContext>
+                        <DataConvert:Textshow/>
+                    </TextBox.DataContext>
+                    <TextBox.Style>
+                        <Style TargetType="{x:Type TextBox}">
+                            <Style.Triggers>
+                                <Trigger Property="Text" Value="{x:Null}">
+                                    <Setter Property="Background" Value="{StaticResource HintText}"/>
+                                </Trigger>
+                                <Trigger Property="Text" Value="">
+                                    <Setter Property="Background" Value="{StaticResource HintText}"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TextBox.Style>
+                </TextBox>
+            </Grid>
+            <Grid Margin="0,0,0,0" Grid.Row="3">
+                <TextBlock Height="15" Margin="5,5,0,0" TextWrapping="Wrap" Text="Binary" VerticalAlignment="Top" HorizontalAlignment="Left" Width="59.734"/>
+                <TextBox x:Name="TB_Bin" PreviewTextInput="TB_Bin_PreviewTextInput" TextChanged="TB_Bin_TextChanged"  InputMethod.IsInputMethodEnabled="False" AcceptsReturn="True" Margin="5,20,5,0" TextWrapping="Wrap" FontFamily="Consolas" FontSize="14" VerticalScrollBarVisibility="Auto">
+                    <TextBox.Resources>
+                        <VisualBrush x:Key="HintText" TileMode="None" Opacity="1" Stretch="None" AlignmentX="Left" AlignmentY="Top">
+                            <VisualBrush.Visual>
+                                <TextBox FontStyle="Normal" Text="01000001 01000010 01000011.." BorderBrush="{x:Null}" SelectionBrush="{x:Null}" Foreground="Gray" Height="{Binding ActualHeight, ElementName=TB_Bin, Mode=OneWay}" Width="{Binding ActualWidth, ElementName=TB_Bin, Mode=OneWay}"/>
+                            </VisualBrush.Visual>
+                        </VisualBrush>
+                    </TextBox.Resources>
+                    <TextBox.DataContext>
+                        <DataConvert:Textshow/>
+                    </TextBox.DataContext>
+                    <TextBox.Style>
+                        <Style TargetType="{x:Type TextBox}">
+                            <Style.Triggers>
+                                <Trigger Property="Text" Value="{x:Null}">
+                                    <Setter Property="Background" Value="{StaticResource HintText}"/>
+                                </Trigger>
+                                <Trigger Property="Text" Value="">
+                                    <Setter Property="Background" Value="{StaticResource HintText}"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TextBox.Style>
+                </TextBox>
+            </Grid>
+        </Grid>
+
+    </Grid>
+</Window>
